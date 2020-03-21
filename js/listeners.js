@@ -17,7 +17,7 @@ document.getElementById("translate-empty").onclick = function () {
     let versesTranslated = getActualTranslatedChapter().verses;
     let itemsToTranslate = [];
     for (let i = 0; i < versesToTranslate.length; i++) {
-        if (versesTranslated[i].verseContent === "") {
+        if (versesTranslated[i].verseContent === "" || versesTranslated[i].verseContent.includes("MYMEMORY WARNING")) {
             itemsToTranslate.push(versesToTranslate[i]);
         }
     }
@@ -35,7 +35,6 @@ document.getElementById("save-button").onclick = function () {
     console.log("save");
     startSaveLoader();
     let dataToSave = prepareProperIndexes();
-    console.log("to save: " + dataToSave);
     let xhr = requestSaveTranslationService();
     xhr.onload = function () {
         console.log("save translations - service response: " + xhr.response);
@@ -91,8 +90,9 @@ function prepareProperIndexes() {
     let toSave = [];
     newIndexes.forEach((value, key) => {
         if (value !== null && value.trim() !== "") {
-            let contentToSave = value.replace(/[„|”|"]/g, '\"').replace(/&quot;/g, '\"').trim();
+            let contentToSave = value.replace(/[„|”]/g, '\"').replace(/&quot;/g, '\"').replace(/["]/g, '\"').trim();
             let i = {"location": key, "content": contentToSave};
+            console.log(i);
             toSave.push(i);
         }
     });
