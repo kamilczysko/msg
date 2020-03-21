@@ -35,8 +35,7 @@ function searchText() {
                 searchResult.setAttribute("class", "menu-item-search");
 
                 if (testament === 'newTestament') {
-                    // searchResult.innerHTML = '<a class="new-testament-search-label" id="search_' + loc + '" href=#>' + label + '</a>';
-                    searchResult.innerHTML = '<a class="new-testament-search-label" id="search_' + loc + '" href=#>' + label +"<strong> (N) </strong>  "+ '</a>';
+                    searchResult.innerHTML = '<a class="new-testament-search-label" id="search_' + loc + '" href=#>' + label + "<strong> (N) </strong>  " + '</a>';
                 } else {
                     searchResult.innerHTML = '<a id="search_' + loc + '" href=#>' + label + '</a>';
                 }

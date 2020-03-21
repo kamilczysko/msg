@@ -2,7 +2,19 @@ function doTranslation(verseContent, verseNumber, isLastTranslation) {
     let verseTranslatedContainer = document.createElement("div");
     verseTranslatedContainer.setAttribute("class", "verse verse-translated");
     verseTranslatedContainer.setAttribute("id", "verse_translated_" + verseNumber);
+    let isFreeTranslationAvailable = true;
     getTranslatedText(verseContent).then(function (text) {
+        if (text.includes("MYMEMORY WARNING")) {
+            isFreeTranslationAvailable = false;
+            let hours = text.match("(\\d{1,}) HOURS")[1];
+            let minutes = text.match("(\\d{1,}) MINUTES")[1];
+            let seconds = text.match("(\\d{1,}) SECONDS")[1];
+            nokMessage("Następne darmowe tłumaczenie za <br>"+hours+" godzin "+minutes+" minut "+seconds+" sekund");
+        }
+        if (!isFreeTranslationAvailable) {
+            stopTranslateProgress();
+            return;
+        }
         verseTranslatedContainer.innerHTML = '<div class="verse"><span class="verse-number"><strong>' + verseNumber + '</strong></span><span class="verse-content" id="translated_verse_' + verseNumber + '" contenteditable="true" >' + text + '</span></div>';
         document.getElementById("verse_translated_" + verseNumber).innerHTML = "";
         document.getElementById("verse_translated_" + verseNumber).appendChild(verseTranslatedContainer);
@@ -12,12 +24,14 @@ function doTranslation(verseContent, verseNumber, isLastTranslation) {
             let contentToSave = document.getElementById("translated_verse_" + verseNumber).textContent;
             updateTranslatedContent(verseNumber, contentToSave);
         });
-        if(isLastTranslation){
+        if (isLastTranslation) {
             stopTranslateProgress();
             okMessage("Przetłumaczono");
         }
     });
 }
+
+// MYMEMORY WARNING: YOU USED ALL AVAILABLE FREE TRANSLATIONS FOR TODAY. NEXT AVAILABLE IN 14 HOURS 45 MINUTES 18 SECONDSVISIT HTTPS://MYMEMORY.TRANSLATED.NET/DOC/USAGELIMITS.PHP TO TRANSLATE MORE
 
 function setNewIndex(verse, newContent) {
     let key = selectedTestament + "_" + selectedBook + "_" + selectedChapter + "_" + verse + "_pl";

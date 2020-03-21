@@ -1,10 +1,11 @@
+
 document.getElementById("translate-all").onclick = function () {
     startTranslateProgress(true);
     console.log("translate all");
     let versesToTranslate = getActualChapter().verses;
     for (let i = 0; i < versesToTranslate.length; i++) {
         let verseNumber = i + 1;
-        let isLast = (i === versesToTranslate.length-1);
+        let isLast = (i === versesToTranslate.length - 1);
         doTranslation(versesToTranslate[i].verseContent, verseNumber, isLast);
     }
 };
@@ -21,7 +22,7 @@ document.getElementById("translate-empty").onclick = function () {
         }
     }
     itemsToTranslate.forEach((verse, i) => {
-        let isLast = i === itemsToTranslate.length-1;
+        let isLast = i === itemsToTranslate.length - 1;
         doTranslation(verse.verseContent, verse.verseNumber, isLast);
     });
 };
@@ -34,7 +35,7 @@ document.getElementById("save-button").onclick = function () {
     console.log("save");
     startSaveLoader();
     let dataToSave = prepareProperIndexes();
-    console.log("to save: "+dataToSave);
+    console.log("to save: " + dataToSave);
     let xhr = requestSaveTranslationService();
     xhr.onload = function () {
         console.log("save translations - service response: " + xhr.response);
@@ -69,9 +70,9 @@ document.getElementById("save-button").onclick = function () {
 function addToLocalIndexes() {
     newIndexes.forEach((value, key) => {
         let wasReplaced = false;
-        for(let i = 0; i < bibleIndex.length; i ++){
-            if(bibleIndex[i]['location'] === key){
-                console.log("replace: "+key+" -- "+value);
+        for (let i = 0; i < bibleIndex.length; i++) {
+            if (bibleIndex[i]['location'] === key) {
+                console.log("replace: " + key + " -- " + value);
                 console.log(bibleIndex[i]);
                 bibleIndex[i]['content'] = value;
                 wasReplaced = true;
@@ -79,7 +80,7 @@ function addToLocalIndexes() {
             }
         }
         if (!wasReplaced) {
-            console.log("added local index: "+key);
+            console.log("added local index: " + key);
             bibleIndex.push({"location": key, "content": value});
         }
     });
