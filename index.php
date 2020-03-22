@@ -60,6 +60,13 @@ $bible_index = file_get_contents("./bible/bible_index.json");
             }
         }
     }</script>
+
+<script>
+    let a = "Jesus said, \"The first in importance is, 'Listen, Israel: The Lord your God is one;";
+    console.log(a);
+    let b = a.replace(/["|”|„|']/g, '').replace(/&quot;/g, '').trim();
+    console.log(b);
+</script>
 <div>
     <div class="messages" id="messages">
     </div>

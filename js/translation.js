@@ -15,10 +15,17 @@ function doTranslation(verseContent, verseNumber, isLastTranslation) {
             stopTranslateProgress();
             return;
         }
-        verseTranslatedContainer.innerHTML = '<div class="verse"><span class="verse-number"><strong>' + verseNumber + '</strong></span><span class="verse-content" id="translated_verse_' + verseNumber + '" contenteditable="true" >' + text + '</span></div>';
+        let quote = '\"';
+        let finalText = text.replace(/["|”]/g, quote)
+            .replace(/[„|']/g, quote)
+            .replace(/[']/g, quote)
+            .replace(/&#39;/g, quote)
+            .replace(/&quot;/g, quote).trim();
+        console.log(finalText);
+        verseTranslatedContainer.innerHTML = '<div class="verse"><span class="verse-number"><strong>' + verseNumber + '</strong></span><span class="verse-content" id="translated_verse_' + verseNumber + '" contenteditable="true" >' + finalText + '</span></div>';
         document.getElementById("verse_translated_" + verseNumber).innerHTML = "";
         document.getElementById("verse_translated_" + verseNumber).appendChild(verseTranslatedContainer);
-        updateTranslatedContent(verseNumber, text);
+        updateTranslatedContent(verseNumber, finalText);
 
         document.getElementById("translated_verse_" + verseNumber).addEventListener("focusout", function (e) {
             let contentToSave = document.getElementById("translated_verse_" + verseNumber).textContent;
@@ -30,8 +37,6 @@ function doTranslation(verseContent, verseNumber, isLastTranslation) {
         }
     });
 }
-
-// MYMEMORY WARNING: YOU USED ALL AVAILABLE FREE TRANSLATIONS FOR TODAY. NEXT AVAILABLE IN 14 HOURS 45 MINUTES 18 SECONDSVISIT HTTPS://MYMEMORY.TRANSLATED.NET/DOC/USAGELIMITS.PHP TO TRANSLATE MORE
 
 function setNewIndex(verse, newContent) {
     let key = selectedTestament + "_" + selectedBook + "_" + selectedChapter + "_" + verse + "_pl";
@@ -95,7 +100,7 @@ function getTranslation(text) {
     return new Promise(function (resolve) {
         let xhr = new XMLHttpRequest();//eafa5a5bfe5eb9869b24
         //05465b163d73187adb76
-        xhr.open('POST', 'https://api.mymemory.translated.net/get?q=' + text + '&key=eafa5a5bfe5eb9869b24&langpair=en|pl&de=kamiwal92@gmail.com', true);
+        xhr.open('POST', 'https://api.mymemory.translated.net/get?q=' + text + '&key=05465b163d73187adb76&langpair=en|pl&de=kamiwal92@gmail.com', true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.onload = function () {
             resolve(xhr.response);

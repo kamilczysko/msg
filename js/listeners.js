@@ -90,7 +90,7 @@ function prepareProperIndexes() {
     let toSave = [];
     newIndexes.forEach((value, key) => {
         if (value !== null && value.trim() !== "") {
-            let contentToSave = value.replace(/[„|”]/g, '\"').replace(/&quot;/g, '\"').replace(/["]/g, '\"').trim();
+            let contentToSave = value.trim();
             let i = {"location": key, "content": contentToSave};
             console.log(i);
             toSave.push(i);
