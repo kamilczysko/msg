@@ -1,4 +1,4 @@
-function drawVerse(verse){
+function drawVerse(verse) {
     let verseNumber = verse.verseNumber;
     let verseContent = verse.verseContent;
 
@@ -14,11 +14,15 @@ function drawVerse(verse){
     getTranslatedVerses(verseNumber);
 }
 
-function getTranslatedVerses(verseNumber){
-    let verseIndex = parseInt(verseNumber)-1;
+function getTranslatedVerses(verseNumber) {
+    let verseIndex = parseInt(verseNumber) - 1;
 
     let verseTranslatedContainer = document.createElement("div");
-    verseTranslatedContainer.setAttribute("class", "verse verse-translated");
+    verseTranslatedContainer.classList.add("verse");
+    verseTranslatedContainer.classList.add("verse-translated");
+    if (isLocationNewlyModified(verseNumber)) {
+        verseTranslatedContainer.classList.add("verse-translated-new");
+    }
     verseTranslatedContainer.setAttribute("id", "verse_translated_" + verseNumber);
 
     let translatedContent = getActualTranslatedChapter().verses[verseIndex].verseContent;
@@ -35,7 +39,12 @@ function getTranslatedVerses(verseNumber){
     setVerseHoverTranslatedSite(verseNumber);
 }
 
-function drawVerseWithSearchResult(verse){
+function isLocationNewlyModified(verseNumber){
+    let key = selectedTestament + "_" + selectedBook + "_" + selectedChapter + "_" + verseNumber + "_pl";
+    return newIndexes.has(key);
+}
+
+function drawVerseWithSearchResult(verse) {
     let verseNumber = verse.verseNumber;
     let verseContent = verse.verseContent;
 
@@ -48,11 +57,11 @@ function drawVerseWithSearchResult(verse){
         console.log("selected verse: " + selectedTestament + " - " + selectedBook + " - " + selectedChapter + "-" + verseNumber);
         doTranslation(verseContent, verseNumber);
     };
-    getTranslatedVersesWithSerchResult(verseNumber);
+    getTranslatedVersesWithSearchResult(verseNumber);
 }
 
-function getTranslatedVersesWithSerchResult(verseNumber){
-    let verseIndex = parseInt(verseNumber)-1;
+function getTranslatedVersesWithSearchResult(verseNumber) {
+    let verseIndex = parseInt(verseNumber) - 1;
 
     let verseTranslatedContainer = document.createElement("div");
     verseTranslatedContainer.setAttribute("class", "verse verse-translated");

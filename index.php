@@ -51,6 +51,7 @@ $bible_index = file_get_contents("./bible/bible_index.json");
     let useFreeTranslator = false;
     let newIndexes = new Map();
     let searchIdx = null;
+    let needSave = false;
 </script>
 
 <script>function getIndexByLoc(loc) {
@@ -147,6 +148,13 @@ $bible_index = file_get_contents("./bible/bible_index.json");
 <script type="text/javascript" src="js/search.js"></script>
 <script src="js/listeners.js"></script>
 <script>clearAllLabels();</script>
+<script type="text/javascript">
+    window.onbeforeunload = function () {
+        if (needSave) {
+            return "Zapisz najpierw!";
+        }
+    };
 
+</script>
 </body>
 </html>

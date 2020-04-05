@@ -25,6 +25,7 @@ function doTranslation(verseContent, verseNumber, isLastTranslation) {
         verseTranslatedContainer.innerHTML = '<div class="verse"><span class="verse-number"><strong>' + verseNumber + '</strong></span><span class="verse-content" id="translated_verse_' + verseNumber + '" contenteditable="true" >' + finalText + '</span></div>';
         document.getElementById("verse_translated_" + verseNumber).innerHTML = "";
         document.getElementById("verse_translated_" + verseNumber).appendChild(verseTranslatedContainer);
+
         updateTranslatedContent(verseNumber, finalText);
 
         document.getElementById("translated_verse_" + verseNumber).addEventListener("focusout", function (e) {
@@ -59,6 +60,10 @@ function setNewBibleTranslationLocal(verse, newContent) {
 }
 
 function updateTranslatedContent(verse, newContent) {
+    needSave = true;
+    let verseTranslated = document.getElementById("translated_verse_"+verse);
+    verseTranslated.classList.add("verse-translated-new");
+
     setNewBibleTranslationLocal(verse, newContent);
     setNewIndex(verse, newContent);
 }

@@ -88,6 +88,10 @@ height: fit-content;
   display: inline;
 }
 
+.verse-translated-new{
+  background: #BFB599;
+}
+
 .verse:hover{
     background-color: #e0e0e0;
 }

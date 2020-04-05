@@ -1,4 +1,3 @@
-
 document.getElementById("translate-all").onclick = function () {
     startTranslateProgress(true);
     console.log("translate all");
@@ -11,15 +10,18 @@ document.getElementById("translate-all").onclick = function () {
 };
 
 document.getElementById("translate-empty").onclick = function () {
-    startTranslateProgress();
     console.log("translate empty");
     let versesToTranslate = getActualChapter().verses;
     let versesTranslated = getActualTranslatedChapter().verses;
     let itemsToTranslate = [];
+
     for (let i = 0; i < versesToTranslate.length; i++) {
         if (versesTranslated[i].verseContent === "" || versesTranslated[i].verseContent.includes("MYMEMORY WARNING")) {
             itemsToTranslate.push(versesToTranslate[i]);
         }
+    }
+    if (itemsToTranslate.length > 0) {
+        startTranslateProgress();
     }
     itemsToTranslate.forEach((verse, i) => {
         let isLast = i === itemsToTranslate.length - 1;
@@ -46,12 +48,15 @@ document.getElementById("save-button").onclick = function () {
             let idx = requestSaveIndexService();
             idx.onload = function () {
                 console.log("save index - service response: " + idx.response);
+                console.log("SAVE OK");
                 if (parseInt(idx.response) === 200) {
                     stopSaveLoader();
                     okMessage("Zapisano");
                     addToLocalIndexes();
+                    blankStyleForModifiedVersesOnVisibleSite();
                     searchIdx = null;
                     newIndexes = new Map();
+                    needSave = false;
                 } else {
                     nokMessage("Błąd zapisu indeksu" + idx.response);
                     document.getElementById("loader").innerHTML = "";
@@ -65,6 +70,14 @@ document.getElementById("save-button").onclick = function () {
     };
     xhr.send("translated=" + JSON.stringify(dataToSave));
 };
+
+function blankStyleForModifiedVersesOnVisibleSite() {
+    let versesToBlank = document.getElementsByClassName("verse-translated-new");
+    console.log(versesToBlank);
+    for (let i = 0; i < versesToBlank.length; i++) {
+        versesToBlank[i].classList.remove("verse-translated-new");
+    }
+}
 
 function addToLocalIndexes() {
     newIndexes.forEach((value, key) => {
