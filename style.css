@@ -89,7 +89,11 @@ height: fit-content;
 }
 
 .verse-translated-new{
-  background: #BFB599;
+  background: #F7E6B5;
+}
+
+.verse-translated-new:hover{
+  background: #ECDBAC;
 }
 
 .verse:hover{
