@@ -72,9 +72,12 @@ document.getElementById("save-button").onclick = function () {
 };
 
 function blankStyleForModifiedVersesOnVisibleSite() {
-    let versesToBlank = document.getElementsByClassName("verse-content verse-translated-new");
-    for (let index = 0; index < versesToBlank.length; index++) {
-        versesToBlank[index].classList.remove("verse-translated-new");
+    let versesToBlank = document.getElementsByClassName("verse-translated-new");
+    console.log(versesToBlank);
+    let length = versesToBlank.length;
+    for (let index = 0; index < length; index++) {
+        console.log(length);
+        versesToBlank[0].classList.remove("verse-translated-new");
     }
 }
 
