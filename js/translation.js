@@ -21,7 +21,6 @@ function doTranslation(verseContent, verseNumber, isLastTranslation) {
             .replace(/[']/g, quote)
             .replace(/&#39;/g, quote)
             .replace(/&quot;/g, quote).trim();
-        console.log(finalText);
         verseTranslatedContainer.innerHTML = '<div class="verse"><span class="verse-number"><strong>' + verseNumber + '</strong></span><span class="verse-content" id="translated_verse_' + verseNumber + '" contenteditable="true" >' + finalText + '</span></div>';
         document.getElementById("verse_translated_" + verseNumber).innerHTML = "";
         document.getElementById("verse_translated_" + verseNumber).appendChild(verseTranslatedContainer);

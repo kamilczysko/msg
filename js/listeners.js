@@ -1,11 +1,11 @@
-document.getElementById("translate-all").onclick = function () {
+document.getElementById("translate-all").onclick = async function () {
     startTranslateProgress(true);
     console.log("translate all");
     let versesToTranslate = getActualChapter().verses;
     for (let i = 0; i < versesToTranslate.length; i++) {
         let verseNumber = i + 1;
         let isLast = (i === versesToTranslate.length - 1);
-        doTranslation(versesToTranslate[i].verseContent, verseNumber, isLast);
+        await doTranslation(versesToTranslate[i].verseContent, verseNumber, isLast);
     }
 };
 
@@ -23,9 +23,9 @@ document.getElementById("translate-empty").onclick = function () {
     if (itemsToTranslate.length > 0) {
         startTranslateProgress();
     }
-    itemsToTranslate.forEach((verse, i) => {
+    itemsToTranslate.forEach(async (verse, i) => {
         let isLast = i === itemsToTranslate.length - 1;
-        doTranslation(verse.verseContent, verse.verseNumber, isLast);
+        await doTranslation(verse.verseContent, verse.verseNumber, isLast);
     });
 };
 
@@ -73,10 +73,8 @@ document.getElementById("save-button").onclick = function () {
 
 function blankStyleForModifiedVersesOnVisibleSite() {
     let versesToBlank = document.getElementsByClassName("verse-translated-new");
-    console.log(versesToBlank);
     let length = versesToBlank.length;
     for (let index = 0; index < length; index++) {
-        console.log(length);
         versesToBlank[0].classList.remove("verse-translated-new");
     }
 }
