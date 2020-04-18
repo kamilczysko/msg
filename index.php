@@ -14,11 +14,11 @@
 </head>
 <body>
 <?php
-$translations = file_get_contents("./bible/translations/pl.json");
-$books = file_get_contents("./bible/books.json");
-$bible_en = file_get_contents("./bible/bible_book.json");
-$bible_translated = file_get_contents("./bible/translations/bible_pl.json");
-$bible_index = file_get_contents("./bible/bible_index.json");
+  $translations = file_get_contents("./bible/translations/pl.json");
+  $books = file_get_contents("./bible/books.json");
+  $bible_en = file_get_contents("./bible/bible_book.json");
+  $bible_translated = file_get_contents("./bible/translations/bible_pl.json");
+  $bible_index = file_get_contents("./bible/bible_index.json");
 ?>
 <script>
     let translationsFromFile = <?php echo $translations?>;
@@ -54,21 +54,7 @@ $bible_index = file_get_contents("./bible/bible_index.json");
     let needSave = false;
 </script>
 
-<script>function getIndexByLoc(loc) {
-        for (let idx of bibleIndex) {
-            if (idx.location.includes(loc)) {
-                console.log(idx);
-            }
-        }
-    }</script>
-
-<script>
-    let a = "Jesus said, \"The first in importance is, 'Listen, Israel: The Lord your God is one;";
-    console.log(a);
-    let b = a.replace(/["|”|„|']/g, '').replace(/&quot;/g, '').trim();
-    console.log(b);
-</script>
-<div>
+<header>
     <div class="messages" id="messages">
     </div>
     <div class="nav-bar" id="nav-bar">
@@ -132,19 +118,19 @@ $bible_index = file_get_contents("./bible/bible_index.json");
             </div>
         </div>
     </div>
-</div>
-
-<div class="content" id="content"></div>
-<div class="content workspace">
-    <div class="content content-translated" id="content-translated"></div>
-    <div id="popup1" class="overlay"></div>
-</div>
-<div class="translator-container">
-    <div class="translator">
-        <label for="translator_choose">Darmowy tłumacz</label><input type="checkbox" id="translator_choose"
-                                                                     name="Darmowy tłumacz">
-    </div>
-</div>
+</header>
+<main>
+  <div class="content" id="content"></div>
+  <div class="content workspace">
+      <div class="content content-translated" id="content-translated"></div>
+      <div id="popup1" class="overlay"></div>
+  </div>
+  <div class="translator-container">
+      <div class="translator">
+          <label for="translator_choose">Darmowy tłumacz</label><input type="checkbox" id="translator_choose" name="Darmowy tłumacz">
+      </div>
+  </div>
+</main>
 <script type="text/javascript" src="js/search.js"></script>
 <script src="js/listeners.js"></script>
 <script>clearAllLabels();</script>
@@ -154,7 +140,6 @@ $bible_index = file_get_contents("./bible/bible_index.json");
             return "Zapisz najpierw!";
         }
     };
-
 </script>
 </body>
 </html>
