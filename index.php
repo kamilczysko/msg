@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./img/icon.png">
     <script type="text/javascript" src="https://unpkg.com/lunr/lunr.js"></script>
     <script type="text/javascript" src="js/testamentElement.js"></script>
     <script type="text/javascript" src="js/bookElement.js"></script>

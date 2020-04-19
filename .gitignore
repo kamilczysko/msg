@@ -1,3 +1,4 @@
 *_Store*
 .idea/
 config.json
+backup/**
