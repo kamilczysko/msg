@@ -1,5 +1,6 @@
 function selectTestament(testament) {
     getBooksByTestament(testament);
+    persistTestament(testament);
     selectedTestament = testament;
     document.getElementById("testament-label").innerHTML = translate(testament);
 }
@@ -14,7 +15,6 @@ function drawTestament(testament) {
         clearLabels();
         clearContent();
         clearSelectedItems();
-
         selectTestament(testament);
     };
 }

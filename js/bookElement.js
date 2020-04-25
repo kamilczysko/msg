@@ -5,6 +5,8 @@ function selectBook(book) {
     selectedBookChapters = getChaptersByBook(book);
     selectedTranslatedBookChapters = getTranslatedChaptersByBook(book);
     fillMenuItemsWithChapterNumbers();
+
+    persistBook(book);
 }
 
 function addBookToMenu(book) {
@@ -17,4 +19,3 @@ function addBookToMenu(book) {
         selectBook(book);
     };
 }
-

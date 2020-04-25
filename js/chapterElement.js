@@ -24,6 +24,7 @@ function setChapter(chapterNumber) {
     for (let verse of chapterContent){
         drawVerse(verse);
     }
+    persistChapter(chapterNumber);
 }
 
 function setChapterForSearch(chapterNumber, foundVerses) {

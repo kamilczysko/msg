@@ -10,6 +10,7 @@
     <script type="text/javascript" src="js/chapterElement.js"></script>
     <script type="text/javascript" src="js/verseContent.js"></script>
     <script type="text/javascript" src="js/translation.js"></script>
+    <script type="text/javascript" src="js/location.js"></script>
     <script type="text/javascript" src="js/utils.js"></script>
     <title>The Message</title>
 </head>
@@ -141,6 +142,9 @@
             return "Zapisz najpierw!";
         }
     };
+</script>
+<script>
+  loadLastLocation();
 </script>
 </body>
 </html>
