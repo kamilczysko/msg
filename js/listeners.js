@@ -38,7 +38,6 @@ document.getElementById("save-button").onclick = function () {
     startSaveLoader();
     let dataToSave = prepareProperIndexes();
     let stats = prepareStats(dataToSave);
-    console.log("STATS"+stats);
     let xhr = requestSaveTranslationService();
     xhr.onload = function () {
         console.log("save translations - service response: " + xhr.response);
