@@ -37,6 +37,8 @@ document.getElementById("save-button").onclick = function () {
     console.log("save");
     startSaveLoader();
     let dataToSave = prepareProperIndexes();
+    let stats = prepareStats(dataToSave);
+    console.log("STATS"+stats);
     let xhr = requestSaveTranslationService();
     xhr.onload = function () {
         console.log("save translations - service response: " + xhr.response);
@@ -63,6 +65,11 @@ document.getElementById("save-button").onclick = function () {
                 }
             };
             idx.send("translated=" + JSON.stringify(dataToSave));
+            let r = saveStats("stats="+JSON.stringify(stats));
+            r.onload = function(){
+                console.log(r.response);
+            };
+            
         } else {
             nokMessage("Błąd zapisu tłumaczeń" + xhr.response);
             document.getElementById("loader").innerHTML = "";
@@ -110,6 +117,18 @@ function prepareProperIndexes() {
         }
     });
     return toSave;
+}
+
+function prepareStats(data){
+    let stats = [];
+    data.forEach((value)=>{
+        let loc = value["location"].toString();
+        let a = loc.split("_");
+        let resLoc = a[1]+"_"+a[2];
+        stats.push({"location": resLoc, "date": new Date().toString()});
+    });
+        return [...new Map(stats.map(item =>
+            [item["location"], item])).values()];
 }
 
 

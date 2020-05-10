@@ -7,6 +7,7 @@
     <script type="text/javascript" src="https://unpkg.com/lunr/lunr.js"></script>
     <script type="text/javascript" src="js/testamentElement.js"></script>
     <script type="text/javascript" src="js/bookElement.js"></script>
+    <script type="text/javascript" src="js/stats.js"></script>
     <script type="text/javascript" src="js/chapterElement.js"></script>
     <script type="text/javascript" src="js/verseContent.js"></script>
     <script type="text/javascript" src="js/translation.js"></script>
